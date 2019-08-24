@@ -1,5 +1,6 @@
 package com.example.movies.features.listMoves
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -60,6 +61,7 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
     fun setData(data: List<Movie>, isFinished: Boolean = false) {
         this.isFinished = isFinished
         this.data = data.toMutableList()
+        notifyDataSetChanged()
     }
 
     fun addData(data: List<Movie>, isFinished: Boolean = false) {
@@ -89,9 +91,9 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
             itemView.titleMovie.text = movie.title
             itemView.dateMovie.text = datePatterBr(movie.date)
             itemView.genres.text = movie.genres
-            itemView.adult.text = "${movie.adult}"
-            itemView.note.text = "${movie.noteAverage}"
-            itemView.language.text = movie.originalLang
+            itemView.adult.text = if(movie.adult) "Filme Adulto" else ""
+            itemView.note.text = "Nota: ${movie.noteAverage}"
+            itemView.language.text = "Linguagem:  ${movie.originalLang.toUpperCase()}"
 
             Glide.with(itemView.context)
                 .load(base_image + movie.poster)

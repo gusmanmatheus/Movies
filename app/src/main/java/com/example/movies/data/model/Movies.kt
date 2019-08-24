@@ -3,7 +3,7 @@ package com.example.movies.data.model
 import com.google.gson.annotations.SerializedName
 
 
-data class PageList(
+data class PageMovie(
     @SerializedName("results")
     var listMovies:MutableList<Movie>,
     var page:Int,

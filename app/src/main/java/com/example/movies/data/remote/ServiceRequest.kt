@@ -3,7 +3,7 @@ package com.example.movies.data.remote
 import com.example.movies.BuildConfig.api_key
 import com.example.movies.BuildConfig.language
 import com.example.movies.data.model.GenresList
-import com.example.movies.data.model.PageList
+import com.example.movies.data.model.PageMovie
 import com.example.movies.data.remote.ServiceProvider.Companion.request
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,15 +14,15 @@ class ServiceRequest {
     fun getNextPage(
         page: Int,
         failure: (failure: String) -> Unit,
-        success: (pageList: PageList) -> Unit
+        success: (pageMovie: PageMovie) -> Unit
     ) {
         request.getPageMovies(api_key, language, page)
-            .enqueue(object : Callback<PageList> {
-                override fun onFailure(call: Call<PageList>, t: Throwable) {
+            .enqueue(object : Callback<PageMovie> {
+                override fun onFailure(call: Call<PageMovie>, t: Throwable) {
                     failure(t.message.toString())
                 }
 
-                override fun onResponse(call: Call<PageList>, response: Response<PageList>) {
+                override fun onResponse(call: Call<PageMovie>, response: Response<PageMovie>) {
                     response.body()?.let(success)
                 }
 

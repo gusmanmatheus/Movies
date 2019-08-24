@@ -7,16 +7,10 @@
         android:background="#000000"
         tools:context=".features.listMoves.MoviesListActivity">
 
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     <Button
             android:id="@+id/reverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbarMain"
             android:text="Reverse" />
 
     <android.support.v7.widget.RecyclerView
