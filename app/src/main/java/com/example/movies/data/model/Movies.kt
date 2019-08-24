@@ -20,7 +20,7 @@ data class Movie(
     @SerializedName("original_title")
     val originalTitle: String,
     @SerializedName("genre_ids")
-    val genre: List<Int>,
+    val genresId: List<Int>,
     @SerializedName("backdrop_path")
     val image: String,
     val adult: Boolean,
@@ -32,7 +32,9 @@ data class Movie(
     val noteAverage: Double,
     @SerializedName("release_date")
     val date: String,
-    var favorite: Boolean = false
+    var favorite: Boolean = false,
+    var genresList:List<Genres>
+
 )
 
 

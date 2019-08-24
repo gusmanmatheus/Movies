@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Movies</string>
+
+    <string name="title">Title</string>
+    <string name="patterDate">00/00/0000</string>
+    <string name="genres">"Genres"</string>
+    <string name="note">10.0</string>
+    <string name="language">"lan"</string>
+    <string name="adult">"False"</string>
 </resources>

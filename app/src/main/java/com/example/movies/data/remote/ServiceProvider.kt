@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ServiceProvider {
     companion object {
-        val retrofit: Retrofit = Retrofit.Builder()
+        private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(base_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

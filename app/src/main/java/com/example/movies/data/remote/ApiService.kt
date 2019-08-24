@@ -8,8 +8,6 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-
-
     @GET("movie/upcoming/")
     fun getPageMovies(
         @Query("api_key") api_key: String,
@@ -17,9 +15,9 @@ interface ApiService {
         @Query("page") page: Int
     ): Call<PageList>
 
-    @GET("genre/movie/list/")
+    @GET("genresId/movie/list/")
     fun getGenres(
         @Query("api_key") api_key: String,
         @Query("language") language: String
-    ):Call<GenresList>
+    ): Call<GenresList>
 }

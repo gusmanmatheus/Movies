@@ -20,9 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug{
-            buildConfigField("String","api_key","1f54bd990f1cdfb230adb312546d765d")
-            buildConfigField("String","language","pt-BR")
-            buildConfigField("String","base_url","https://api.themoviedb.org/3")
+            buildConfigField("String","api_key",'"1f54bd990f1cdfb230adb312546d765d"')
+            buildConfigField("String","language",'"pt-BR"')
+            buildConfigField("String","base_url",'"https://api.themoviedb.org/3"')
+            buildConfigField("String","base_image",'"https://image.tmdb.org/t/p/w185/"')
+
+
         }
     }
 }
