@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="name_db">"moviesdb"</string>
 
     <string name="title">Title</string>
+    <string name="originalTitle">Original Title</string>
+    <string name="originalLanguage">LAN</string>
     <string name="patterDate">00/00/0000</string>
     <string name="genres">"Genres"</string>
     <string name="note">10.0</string>
+    <string name="numberVotes">0000</string>
     <string name="language">"lan"</string>
     <string name="adult">"False"</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="moviesPtBr">Filmes</string>
+    <string name="favoritesPtBr">Favoritos</string>
+    
 </resources>

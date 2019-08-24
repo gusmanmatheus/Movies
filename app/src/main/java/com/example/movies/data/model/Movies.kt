@@ -33,7 +33,7 @@ data class Movie(
     @SerializedName("release_date")
     val date: String,
     var favorite: Boolean = false,
-    var genresList:List<Genres>
+    var genres:String
 
 )
 

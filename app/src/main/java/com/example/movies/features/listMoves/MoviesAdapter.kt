@@ -88,10 +88,7 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
         override fun render(movie: Movie) {
             itemView.titleMovie.text = movie.title
             itemView.dateMovie.text = datePatterBr(movie.date)
-            var genresAux = ""
-            movie.genresList.forEach {
-                genresAux += it.name + " "
-            }
+            itemView.genres.text = movie.genres
             itemView.adult.text = "${movie.adult}"
             itemView.note.text = "${movie.noteAverage}"
             itemView.language.text = movie.originalLang
