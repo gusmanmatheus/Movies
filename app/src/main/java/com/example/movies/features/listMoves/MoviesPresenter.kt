@@ -2,6 +2,7 @@ package com.example.movies.features.listMoves
 
 import com.example.movies.data.local.MovieDAO
 import com.example.movies.data.model.GenresList
+import com.example.movies.data.model.Movie
 import com.example.movies.data.model.PageMovie
 import com.example.movies.data.remote.ServiceRequest
 
@@ -14,6 +15,7 @@ class MoviesPresenter(
 
     private var listGenres = GenresList(mutableListOf())
     private var pageMovie = PageMovie(mutableListOf(), 0, 0)
+    private var backupList: MutableList<Movie> = emptyList<Movie>().toMutableList()
     var sizePage = 0
     private var current = -1
     override fun getGenres() {
@@ -86,9 +88,6 @@ class MoviesPresenter(
         this.sizePage = if (pageMovie.listMovies.size > 0) (pageMovie.listMovies.size / 2) else 0
     }
 
-    override fun getFavorites() {
-
-    }
 
     override fun resetOrder() {
         pageMovie.pageTotal = 1
@@ -100,4 +99,15 @@ class MoviesPresenter(
         pageMovie.page = pageMovie.pageTotal
     }
 
+    override fun getFavorites(): List<Movie> {
+        return db.getMovies()
+    }
+
+    override fun setBackupList(movies: MutableList<Movie>) {
+        this.backupList = movies
+    }
+
+    override fun recoveryBackup(): MutableList<Movie> {
+        return backupList
+    }
 }

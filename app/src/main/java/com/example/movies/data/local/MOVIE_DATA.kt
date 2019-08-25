@@ -12,8 +12,8 @@ class MOVIE_DATA {
         const val IMAGE = "IMAGE"
         const val ADULT = "ADULT"
         const val SYNOPSIS = "SYNOPSIS"
-        const val NOTE_AVERAGE = "NUMBER_VOLTES"
-        const val NUMBER_VOTES = "NUMBER_VOLTES"
+        const val NOTE_AVERAGE = "NOTE_AVERAGE"
+        const val NUMBER_VOTES = "NUMBER_VOTES"
         const val DATE = "DATE"
         const val GENRES = "GENRES"
 
@@ -27,10 +27,11 @@ class MOVIE_DATA {
                 " $IMAGE text," +
                 " $ADULT integer," +
                 " $SYNOPSIS text," +
-                " $NOTE_AVERAGE double," +
+                " $NOTE_AVERAGE real," +
                 " $NUMBER_VOTES integer," +
                 " $DATE text," +
-                " $GENRES text not null);"
+                " $GENRES text);"
+            //genres not null
         val COLUMNS = arrayOf(
             ID_MOVIE,
             POSTER,

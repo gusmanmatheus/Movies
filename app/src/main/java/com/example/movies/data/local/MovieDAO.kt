@@ -54,7 +54,7 @@ class MovieDAO(context: Context) : BaseDAO(context) {
                         cursor.getDouble(9),
                         cursor.getString(10),
                         true,
-                        cursor.getString(11)
+                        cursor.getString(11)?:" "
                     )
                 )
             } while (cursor.moveToNext())
@@ -85,6 +85,16 @@ class MovieDAO(context: Context) : BaseDAO(context) {
         return list
     }
 
+    fun deleteMovie(idMovie: Int) {
+        val db = writableDatabase
+        db.delete(
+            MOVIE_DATA.TABLE_NAME,
+            "${MOVIE_DATA.ID_MOVIE} = $idMovie",
+            null
+        )
+        db.close()
+
+    }
 
     fun objectToContentValues(movie: Movie): ContentValues {
         val values = ContentValues()

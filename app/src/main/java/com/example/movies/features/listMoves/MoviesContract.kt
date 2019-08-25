@@ -19,8 +19,10 @@ interface MoviesContract {
         fun loadMore()
         fun nextPage()
         fun orderDate()
-        fun getFavorites()
+        fun getFavorites(): List<Movie>
         fun resetOrder()
         fun resetReverseOrder()
+        fun setBackupList(movies: MutableList<Movie>)
+        fun recoveryBackup(): MutableList<Movie>
     }
 }

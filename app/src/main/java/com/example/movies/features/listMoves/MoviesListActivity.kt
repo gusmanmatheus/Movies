@@ -1,14 +1,15 @@
 package com.example.movies.features.listMoves
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.internal.BottomNavigationItemView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.example.movies.R
 import com.example.movies.data.model.Movie
+import com.example.movies.features.movieDetails.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -23,6 +24,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     private var loadListLocked = false
     private var onePage = false
     private var orderList = true
+    private var listFocus = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +34,18 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         presenter.getGenres()
         scrollLoading()
         reverse.setOnClickListener { invertAction() }
-    }
+        movieClick()
 
+
+   }
+    private fun movieClick(){
+        adapter.onItemClick = {
+            Toast.makeText(this,"${it.originalTitle}",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,DetailsActivity::class.java)
+            intent.putExtra(resources.getString(R.string.intentMovieToDetails),it)
+            startActivity(intent)
+            }
+    }
     private fun setupRecyclerView() {
         recyclerView.layoutManager = llm
         recyclerView.adapter = adapter

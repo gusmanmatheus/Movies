@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="name_db">"moviesdb"</string>
-
+    <string name="intentMovieToDetails">intentMovieToDetails</string>
     <string name="title">Title</string>
     <string name="originalTitle">Original Title</string>
     <string name="originalLanguage">LAN</string>

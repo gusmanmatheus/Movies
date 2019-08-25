@@ -2,6 +2,7 @@ package com.example.movies.base
 
 import android.app.Application
 import com.example.movies.base.modules.baseModule
+import com.example.movies.base.modules.detailsModule
 import com.example.movies.base.modules.listModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -10,7 +11,8 @@ import org.koin.core.context.startKoin
 class APP : Application() {
     private val modules = listOf(
         baseModule,
-        listModule
+        listModule,
+        detailsModule
     )
 
     override fun onCreate() {
