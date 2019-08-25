@@ -35,26 +35,26 @@ class MovieDAO(context: Context) : BaseDAO(context) {
                 null,
                 null,
                 null,
-                null
+                MOVIE_DATA.DATE
             )
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 list.add(
                     Movie(
                         cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
+                        cursor.getString(1) ?: " ",
+                        cursor.getString(2) ?: " ",
+                        cursor.getString(3) ?: " ",
+                        cursor.getString(4) ?: " ",
                         emptyList(),
-                        cursor.getString(5),
+                        cursor.getString(5) ?: " ",
                         cursor.getInt(6) > 0,
-                        cursor.getString(7),
-                        cursor.getInt(8),
-                        cursor.getDouble(9),
-                        cursor.getString(10),
+                        cursor.getString(7) ?: " ",
+                        cursor.getInt(8) ?: 0,
+                        cursor.getDouble(9) ?: 0.0,
+                        cursor.getString(10) ?: " ",
                         true,
-                        cursor.getString(11)?:" "
+                        cursor.getString(11) ?: " "
                     )
                 )
             } while (cursor.moveToNext())

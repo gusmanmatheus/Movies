@@ -24,5 +24,6 @@ interface MoviesContract {
         fun resetReverseOrder()
         fun setBackupList(movies: MutableList<Movie>)
         fun recoveryBackup(): MutableList<Movie>
+        fun invertList(mutableList: MutableList<Movie>): MutableList<Movie>
     }
 }

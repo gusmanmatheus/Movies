@@ -33,19 +33,73 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         setupRecyclerView()
         presenter.getGenres()
         scrollLoading()
-        reverse.setOnClickListener { invertAction() }
+        inversor()
         movieClick()
-
-
-   }
-    private fun movieClick(){
-        adapter.onItemClick = {
-            Toast.makeText(this,"${it.originalTitle}",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,DetailsActivity::class.java)
-            intent.putExtra(resources.getString(R.string.intentMovieToDetails),it)
-            startActivity(intent)
-            }
+        selectedMenuItem()
     }
+
+    override fun onStart() {
+        super.onStart()
+        if (listFocus) return
+        adapter.setData(presenter.getFavorites())
+        adapter.notifyDataSetChanged()
+        adapter.notifyItemRemoved(adapter.itemCount)
+
+    }
+
+    fun inversor() {
+        reverse.setOnClickListener {
+            if (!listFocus) {
+            adapter.data = presenter.invertList(adapter.data)
+              adapter.notifyDataSetChanged()
+            } else {
+                invertAction()
+            }
+        }
+    }
+
+    private fun selectedMenuItem() {
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_favorite -> {
+                    favoritesChanged()
+                }
+                R.id.nav_list -> {
+                    listChanged()
+                }
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+    }
+
+    private fun favoritesChanged() {
+        if (!listFocus) return
+        listFocus = !listFocus
+        presenter.setBackupList(adapter.data)
+        adapter.setData(presenter.getFavorites())
+        adapter.notifyDataSetChanged()
+        adapter.notifyItemRemoved(adapter.itemCount)
+
+
+    }
+
+    private fun listChanged() {
+        if (listFocus) return
+        listFocus = !listFocus
+        adapter.setData(presenter.recoveryBackup())
+        adapter.notifyDataSetChanged()
+
+    }
+
+    private fun movieClick() {
+        adapter.onItemClick = {
+            Toast.makeText(this, "${it.originalTitle}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra(resources.getString(R.string.intentMovieToDetails), it)
+            startActivity(intent)
+        }
+    }
+
     private fun setupRecyclerView() {
         recyclerView.layoutManager = llm
         recyclerView.adapter = adapter
@@ -55,8 +109,10 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                adapter.notifyItemRemoved(adapter.itemCount)
-                if (loadListLocked) return
+                if (loadListLocked || !listFocus) {
+                    adapter.notifyItemRemoved(adapter.itemCount)
+                    return
+                }
 
                 val lastVisibleMoviePosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()

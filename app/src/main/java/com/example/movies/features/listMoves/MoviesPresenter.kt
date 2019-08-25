@@ -61,10 +61,12 @@ class MoviesPresenter(
             fun(success) {
                 pageMovie = success
                 orderDate()
+                if(!view.valueOrder()){
+                    pageMovie.listMovies = invertList(pageMovie.listMovies)
+                }
+                idToGenre()
                 attValue()
                 view.setupList(pageMovie.listMovies)
-
-
             })
     }
 
@@ -74,14 +76,25 @@ class MoviesPresenter(
 
     }
 
+    override fun invertList(mutableList: MutableList<Movie>): MutableList<Movie> {
+        return mutableList.reversed().toMutableList()
+    }
+
+
     private fun idToGenre() {
         var aux = ""
-        //   pageMovie.listMovies.forEach {pageMovie ->
-        //    pageMovie.genresId.forEach {genreId ->
-        //     if (listGenres.listGenres.any { it.id == genreId })
+           pageMovie.listMovies.forEach {pageMovie ->
+            pageMovie.genresId.forEach {genreId ->
+                listGenres.listGenres.forEach {
+                    if(genreId == it.id){
+                        aux += it.name+" "
+                    }
+                }
 
-        //  }
-        // }
+          }
+               pageMovie.genres = aux
+               aux = ""
+         }
     }
 
     private fun attValue() {
