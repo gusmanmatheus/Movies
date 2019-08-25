@@ -8,7 +8,7 @@ interface MoviesContract {
     interface View : BaseView<Presenter> {
         fun setupList(listMovies: MutableList<Movie>)
         fun finishLoad()
-        fun revertFInishLoad()
+        fun revertFinishLoad()
         fun showError(error: String)
         fun valueOrder(): Boolean
 
@@ -17,8 +17,8 @@ interface MoviesContract {
     interface Presenter : BasePresenter<View> {
         fun getGenres()
         fun loadMore()
-        fun nextPage(page: Int)
-        fun orderDate(list: MutableList<Movie>)
+        fun nextPage()
+        fun orderDate()
         fun getFavorites()
         fun resetOrder()
     }

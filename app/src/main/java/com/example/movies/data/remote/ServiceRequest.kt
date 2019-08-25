@@ -33,7 +33,7 @@ class ServiceRequest {
         failure: (failure: String) -> Unit,
         success: (listGenres: GenresList) -> Unit
     ) {
-        request.getGenres(api_key,language)
+        request.getGenres(api_key, language)
             .enqueue(object : Callback<GenresList> {
                 override fun onFailure(call: Call<GenresList>, t: Throwable) {
                     failure(t.message.toString())

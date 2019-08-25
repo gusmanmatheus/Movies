@@ -18,5 +18,5 @@ val listModule = module {
             db = get(),
             service = get()
         )
-    }bind MoviesPresenter::class
+    } bind MoviesPresenter::class
 }

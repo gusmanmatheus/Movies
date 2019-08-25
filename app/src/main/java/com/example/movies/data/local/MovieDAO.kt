@@ -55,7 +55,7 @@ class MovieDAO(context: Context) : BaseDAO(context) {
                         cursor.getString(10),
                         true,
                         cursor.getString(11)
-                        )
+                    )
                 )
             } while (cursor.moveToNext())
         }

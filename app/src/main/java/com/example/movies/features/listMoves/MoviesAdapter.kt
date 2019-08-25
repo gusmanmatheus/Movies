@@ -44,7 +44,6 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
 
     override fun getItemCount() = data.size + if (isFinished) 0 else 1
 
-
     override fun onBindViewHolder(holder: Holder, position: Int) {
         data.getOrNull(position)?.let {
             holder.render(it)
@@ -59,8 +58,8 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
     }
 
     fun setData(data: List<Movie>, isFinished: Boolean = false) {
-        this.isFinished = isFinished
         this.data = data.toMutableList()
+        this.isFinished = isFinished
         notifyDataSetChanged()
     }
 
@@ -91,7 +90,7 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
             itemView.titleMovie.text = movie.title
             itemView.dateMovie.text = datePatterBr(movie.date)
             itemView.genres.text = movie.genres
-            itemView.adult.text = if(movie.adult) "Filme Adulto" else ""
+            itemView.adult.text = if (movie.adult) "Filme Adulto" else ""
             itemView.note.text = "Nota: ${movie.noteAverage}"
             itemView.language.text = "Linguagem:  ${movie.originalLang.toUpperCase()}"
 
