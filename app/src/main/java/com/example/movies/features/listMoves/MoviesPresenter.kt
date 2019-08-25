@@ -1,9 +1,7 @@
 package com.example.movies.features.listMoves
 
-import android.util.Log
 import com.example.movies.data.local.MovieDAO
 import com.example.movies.data.model.GenresList
-import com.example.movies.data.model.Movie
 import com.example.movies.data.model.PageMovie
 import com.example.movies.data.remote.ServiceRequest
 
@@ -17,6 +15,7 @@ class MoviesPresenter(
     private var listGenres = GenresList(mutableListOf())
     private var pageMovie = PageMovie(mutableListOf(), 0, 0)
     var sizePage = 0
+    private var current = -1
     override fun getGenres() {
         service.getGenres(
             fun(failure) {
@@ -29,7 +28,13 @@ class MoviesPresenter(
     }
 
     override fun loadMore() {
-        if (pageMovie.page >= pageMovie.pageTotal) {
+        val stopScroll = if (view.valueOrder()) {
+            pageMovie.page >= pageMovie.pageTotal
+        } else {
+            pageMovie.page <= 1
+
+        }
+        if (stopScroll) {
             view.finishLoad()
 
         } else {
@@ -40,10 +45,18 @@ class MoviesPresenter(
     }
 
     override fun nextPage() {
-        service.getNextPage(pageMovie.page + 1,
+        val numberPage = if (view.valueOrder()) {
+            pageMovie.page + 1
+        } else {
+            current++
+            pageMovie.pageTotal - current
+        }
+
+        service.getNextPage(numberPage,
             fun(failure) {
                 view.showError(failure)
-            }, fun(success) {
+            },
+            fun(success) {
                 pageMovie = success
                 orderDate()
                 attValue()
@@ -74,10 +87,17 @@ class MoviesPresenter(
     }
 
     override fun getFavorites() {
+
     }
 
     override fun resetOrder() {
+        pageMovie.pageTotal = 1
+        pageMovie.page = 0
     }
 
+    override fun resetReverseOrder() {
+        current = -1
+        pageMovie.page = pageMovie.pageTotal
+    }
 
 }

@@ -8,7 +8,7 @@ data class PageMovie(
     var listMovies:MutableList<Movie>,
     var page:Int,
     @SerializedName("total_pages")
-    val pageTotal:Int)
+    var pageTotal:Int)
 
 data class Movie(
     val id: Int,

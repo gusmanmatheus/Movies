@@ -32,23 +32,22 @@ class MOVIE_DATA {
                 " $DATE text," +
                 " $GENRES text not null);"
         val COLUMNS = arrayOf(
-            MOVIE_DATA.ID_MOVIE,
-            MOVIE_DATA.POSTER,
-            MOVIE_DATA.TITLE,
-            MOVIE_DATA.ORIGINAL_LANG,
-            MOVIE_DATA.ORIGINAL_TITLE,
-            MOVIE_DATA.IMAGE,
-            MOVIE_DATA.ADULT,
-            MOVIE_DATA.SYNOPSIS,
-            MOVIE_DATA.NOTE_AVERAGE,
-            MOVIE_DATA.NUMBER_VOTES,
-            MOVIE_DATA.DATE,
-            MOVIE_DATA.GENRES
+            ID_MOVIE,
+            POSTER,
+            TITLE,
+            ORIGINAL_LANG,
+            ORIGINAL_TITLE,
+            IMAGE,
+            ADULT,
+            SYNOPSIS,
+            NOTE_AVERAGE,
+            NUMBER_VOTES,
+            DATE,
+            GENRES
 
         )
 
     }
-
 
 
 }

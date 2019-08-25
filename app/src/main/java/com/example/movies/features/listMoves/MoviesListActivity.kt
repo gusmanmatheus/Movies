@@ -2,8 +2,11 @@ package com.example.movies.features.listMoves
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.internal.BottomNavigationItemView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.widget.Toast
 import com.example.movies.R
 import com.example.movies.data.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +22,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     private lateinit var llm: LinearLayoutManager
     private var loadListLocked = false
     private var onePage = false
+    private var orderList = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         setupRecyclerView()
         presenter.getGenres()
         scrollLoading()
+        reverse.setOnClickListener { invertAction() }
     }
 
     private fun setupRecyclerView() {
@@ -38,6 +43,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
+                adapter.notifyItemRemoved(adapter.itemCount)
                 if (loadListLocked) return
 
                 val lastVisibleMoviePosition =
@@ -48,6 +54,19 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
                 }
             }
         })
+    }
+
+    private fun invertAction(): Boolean {
+        this.orderList = !orderList
+        adapter.setData(emptyList())
+        if (orderList) {
+            presenter.resetOrder()
+        } else {
+            presenter.resetReverseOrder()
+        }
+        presenter.loadMore()
+
+        return orderList
     }
 
     override fun setupList(listMovies: MutableList<Movie>) {
@@ -69,10 +88,11 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
+
 
     override fun valueOrder(): Boolean {
-        return true
+        return this.orderList
     }
-
 }

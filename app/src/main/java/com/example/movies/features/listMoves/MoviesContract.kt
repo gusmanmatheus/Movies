@@ -21,5 +21,6 @@ interface MoviesContract {
         fun orderDate()
         fun getFavorites()
         fun resetOrder()
+        fun resetReverseOrder()
     }
 }
