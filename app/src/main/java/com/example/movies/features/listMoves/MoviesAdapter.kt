@@ -43,7 +43,11 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
         }
     }
 
-    override fun getItemCount() = data.size + if (isFinished) 0 else 1
+    override fun getItemCount() = data.size + if (isFinished) 1 else 0
+
+    fun isFinished() {
+        this.isFinished = true
+    }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         data.getOrNull(position)?.let {
@@ -68,7 +72,7 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
         this.isFinished = isFinished
         val positionStart = data.size
         this.data.addAll(data)
-        val positionEnd = data.size + if (isFinished) 0 else 1
+        val positionEnd = data.size + if (isFinished) 1 else 0
         notifyItemRangeChanged(positionStart, positionEnd)
     }
 
@@ -109,5 +113,5 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
     }
 
     inner class LoadingHolder(itemView: View) : Holder(itemView)
-    }
+}
 

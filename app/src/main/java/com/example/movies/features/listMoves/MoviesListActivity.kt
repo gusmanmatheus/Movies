@@ -110,14 +110,18 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (loadListLocked || !listFocus) {
-                    adapter.notifyItemRemoved(adapter.itemCount)
+                    if (listFocus) {
+                        adapter.notifyItemRemoved(adapter.itemCount)
+                    }
                     return
                 }
+                adapter.isFinished()
                 val lastVisibleMoviePosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                 if ((lastVisibleMoviePosition + presenter.sizePage) >= adapter.itemCount && !onePage) {
                     onePage = true
                     presenter.loadMore()
+                    adapter.notifyItemRemoved(adapter.itemCount)
                 }
             }
         })
