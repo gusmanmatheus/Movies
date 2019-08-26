@@ -15,7 +15,7 @@ interface DetailsContract {
         fun deleteMovie(id: Int)
         fun insertMovie(movie: Movie)
         fun getMovie(): Movie
-        fun insertOrDelete(id:Int)
+        fun insertOrDelete(id: Int)
         fun changeStatusFavorite()
     }
 }

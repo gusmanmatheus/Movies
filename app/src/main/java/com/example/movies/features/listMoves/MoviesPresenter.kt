@@ -61,7 +61,7 @@ class MoviesPresenter(
             fun(success) {
                 pageMovie = success
                 orderDate()
-                if(!view.valueOrder()){
+                if (!view.valueOrder()) {
                     pageMovie.listMovies = invertList(pageMovie.listMovies)
                 }
                 idToGenre()
@@ -83,22 +83,22 @@ class MoviesPresenter(
 
     private fun idToGenre() {
         var aux = ""
-           pageMovie.listMovies.forEach {pageMovie ->
-            pageMovie.genresId.forEach {genreId ->
+        pageMovie.listMovies.forEach { pageMovie ->
+            pageMovie.genresId.forEach { genreId ->
                 listGenres.listGenres.forEach {
-                    if(genreId == it.id){
-                        aux += it.name+" "
+                    if (genreId == it.id) {
+                        aux += it.name + " "
                     }
                 }
 
-          }
-               pageMovie.genres = aux
-               aux = ""
-         }
+            }
+            pageMovie.genres = aux
+            aux = ""
+        }
     }
 
     private fun attValue() {
-        this.sizePage = if (pageMovie.listMovies.size > 0) (pageMovie.listMovies.size / 2) else 0
+        this.sizePage = (pageMovie.listMovies.size.plus(2) / 2)
     }
 
 
@@ -123,4 +123,5 @@ class MoviesPresenter(
     override fun recoveryBackup(): MutableList<Movie> {
         return backupList
     }
+
 }

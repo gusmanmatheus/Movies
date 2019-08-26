@@ -50,8 +50,8 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     fun inversor() {
         reverse.setOnClickListener {
             if (!listFocus) {
-            adapter.data = presenter.invertList(adapter.data)
-              adapter.notifyDataSetChanged()
+                adapter.data = presenter.invertList(adapter.data)
+                adapter.notifyDataSetChanged()
             } else {
                 invertAction()
             }
@@ -78,7 +78,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
         presenter.setBackupList(adapter.data)
         adapter.setData(presenter.getFavorites())
         adapter.notifyDataSetChanged()
-        adapter.notifyItemRemoved(adapter.itemCount)
+        //adapter.notifyItemChanged(adapter.itemCount)
 
 
     }
@@ -86,6 +86,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     private fun listChanged() {
         if (listFocus) return
         listFocus = !listFocus
+        adapter.setData(emptyList())
         adapter.setData(presenter.recoveryBackup())
         adapter.notifyDataSetChanged()
 
@@ -93,7 +94,6 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
 
     private fun movieClick() {
         adapter.onItemClick = {
-            Toast.makeText(this, "${it.originalTitle}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, DetailsActivity::class.java)
             intent.putExtra(resources.getString(R.string.intentMovieToDetails), it)
             startActivity(intent)
@@ -113,10 +113,9 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
                     adapter.notifyItemRemoved(adapter.itemCount)
                     return
                 }
-
                 val lastVisibleMoviePosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                if ((lastVisibleMoviePosition + presenter.sizePage) > adapter.itemCount && !onePage) {
+                if ((lastVisibleMoviePosition + presenter.sizePage) >= adapter.itemCount && !onePage) {
                     onePage = true
                     presenter.loadMore()
                 }
@@ -127,6 +126,7 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     private fun invertAction(): Boolean {
         this.orderList = !orderList
         adapter.setData(emptyList())
+        adapter.notifyDataSetChanged()
         if (orderList) {
             presenter.resetOrder()
         } else {
@@ -138,12 +138,17 @@ class MoviesListActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun setupList(listMovies: MutableList<Movie>) {
+
         if (adapter.data.size > 0) {
             adapter.addData(listMovies)
         } else {
             adapter.setData(listMovies)
         }
         onePage = false
+
+        if (adapter.data.size <= 4) {
+            presenter.loadMore()
+        }
     }
 
 

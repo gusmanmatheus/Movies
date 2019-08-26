@@ -20,13 +20,13 @@ val listModule = module {
             db = get(),
             service = get()
         )
-    }bind MoviesPresenter::class
+    } bind MoviesPresenter::class
 }
 val detailsModule = module {
-        factory { (view: DetailsContract.View) ->
-            DetailsPresenter(
-                view,
-                get()
-            )
-        }
+    factory { (view: DetailsContract.View) ->
+        DetailsPresenter(
+            view,
+            get()
+        )
     }
+}

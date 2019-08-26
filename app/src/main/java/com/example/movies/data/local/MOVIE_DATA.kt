@@ -31,7 +31,6 @@ class MOVIE_DATA {
                 " $NUMBER_VOTES integer," +
                 " $DATE text," +
                 " $GENRES text);"
-        //genres not null
         val COLUMNS = arrayOf(
             ID_MOVIE,
             TITLE,

@@ -24,16 +24,16 @@ class DetailsActivity : AppCompatActivity(), DetailsContract.View {
 
     private fun recoveryData() {
         val movie =
-            intent.getSerializableExtra(this.resources.getString(R.string.intentMovieToDetails)) as Movie
+            intent.getSerializableExtra(resources.getString(R.string.intentMovieToDetails)) as Movie
         presenter.setMovie(movie)
-        titleDetail.text = "Titulo: " + movie.title
-        oriTitleDetail.text = "Titulo original: " + movie.originalTitle
-        oriLanguageDetail.text = "Linguagem: " + movie.originalLang
-        genresDetail.text = "genero(s): " + movie.genres
-        adultDetail.text = if (movie.adult) "Filme Adulto" else " "
-        noteDetail.text = "Nota do filme: ${movie.noteAverage}"
-        numVotesDetail.text = "Numeros de votos: ${movie.numberVotes}"
-        synopsisDetail.text = "Sinopse:\n " + movie.synopsis
+        titleDetail.text = resources.getString(R.string.preTitle) + movie.title
+        oriTitleDetail.text = resources.getString(R.string.preTitleOri)+ movie.originalTitle
+        oriLanguageDetail.text = resources.getString(R.string.preLangOri)+ movie.originalLang
+        genresDetail.text = resources.getString(R.string.preGenre) + movie.genres
+        adultDetail.text = if (movie.adult) resources.getString(R.string.preAdult) else " "
+        noteDetail.text = resources.getString(R.string.preNote)+"${movie.noteAverage}"
+        numVotesDetail.text = resources.getString(R.string.preNumVotes)+"${movie.numberVotes}"
+        synopsisDetail.text = resources.getString(R.string.preSynopsis) + movie.synopsis
         if (presenter.veryMovie(movie.id)) {
             favoriteButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             movie.favorite = true
@@ -46,12 +46,11 @@ class DetailsActivity : AppCompatActivity(), DetailsContract.View {
 
     private fun favorite() {
         favoriteButton.setOnClickListener {
-         presenter.insertOrDelete(presenter.getMovie().id)
+            presenter.insertOrDelete(presenter.getMovie().id)
             presenter.changeStatusFavorite()
-            if(presenter.getMovie().favorite){
+            if (presenter.getMovie().favorite) {
                 favoriteButton.setImageResource(R.drawable.ic_favorite_black_24dp)
-            }
-            else{
+            } else {
                 favoriteButton.setImageResource(R.drawable.ic_favorite_border_red_24dp)
 
             }

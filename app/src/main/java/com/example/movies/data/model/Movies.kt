@@ -6,10 +6,11 @@ import java.io.Serializable
 
 data class PageMovie(
     @SerializedName("results")
-    var listMovies:MutableList<Movie>,
-    var page:Int,
+    var listMovies: MutableList<Movie>,
+    var page: Int,
     @SerializedName("total_pages")
-    var pageTotal:Int)
+    var pageTotal: Int
+)
 
 data class Movie(
     val id: Int,
@@ -34,9 +35,9 @@ data class Movie(
     @SerializedName("release_date")
     val date: String,
     var favorite: Boolean = false,
-    var genres:String
+    var genres: String
 
-):Serializable
+) : Serializable
 
 
 

@@ -2,4 +2,8 @@
 <resources>
     <dimen name="image_widthMedium">140dp</dimen>
     <dimen name="image_heightMedium">200dp</dimen>
+    <dimen name = "margin_small">16dp</dimen>
+    <dimen name="margin_medium">24dp</dimen>
+
+    <dimen name="text_small">16sp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.movies.features.listMoves
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -69,7 +70,6 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
         this.data.addAll(data)
         val positionEnd = data.size + if (isFinished) 0 else 1
         notifyItemRangeChanged(positionStart, positionEnd)
-
     }
 
     abstract inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -90,9 +90,12 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
             itemView.titleMovie.text = movie.title
             itemView.dateMovie.text = datePatterBr(movie.date)
             itemView.genres.text = movie.genres
-            itemView.adult.text = if (movie.adult) "Filme Adulto" else ""
-            itemView.note.text = "Nota: ${movie.noteAverage}"
-            itemView.language.text = "Linguagem:  ${movie.originalLang.toUpperCase()}"
+            itemView.adult.text =
+                if (movie.adult) itemView.context.resources.getString(R.string.preAdult) else ""
+            itemView.note.text =
+                itemView.context.resources.getString(R.string.preNote) + "${movie.noteAverage}"
+            itemView.language.text =
+                itemView.context.resources.getString(R.string.preLangOri) + "${movie.originalLang.toUpperCase()}"
 
             Glide.with(itemView.context)
                 .load(base_image + movie.poster)
@@ -106,5 +109,5 @@ class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.Holder>() {
     }
 
     inner class LoadingHolder(itemView: View) : Holder(itemView)
+    }
 
-}

@@ -4,23 +4,22 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
+        android:background="@color/black"
         tools:context=".features.listMoves.MoviesListActivity">
 
     <Button
             android:id="@+id/reverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reverse" />
+            android:text="@string/reverse" />
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/bottom_navigation"
             android:layout_below="@id/reverse"
-            />
+            android:orientation="vertical" />
 
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"
